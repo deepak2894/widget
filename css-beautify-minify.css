@@ -1,0 +1,81 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.product-container {
+  flex-basis: calc(33.33% - 2px);
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 1px;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.product-container:hover {
+  background-color: #e0e0e0;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-container {
+  width: 100%;
+  text-align: center;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Colors for different product types */
+select[name="recommended_product_type[]"] {
+  background-color: #ff3333;
+  color: white;
+}
+
+select[name="additional_product_type[]"] {
+  background-color: #33cc33;
+  color: white;
+}
+
+select[name="additional_product_type[]"] option[value="Suggested Addon"] {
+  background-color: #3333cc;
+  color: white;
+}
