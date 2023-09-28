@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .product-container {
+            flex-basis: calc(33.33% - 2px);
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 1px;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .product-container:hover {
+            background-color: #e0e0e0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Colors for different product types */
+        select[name="recommended_product_type[]"] {
+            background-color: #ff3333;
+            color: white;
+        }
+
+        select[name="additional_product_type[]"] {
+            background-color: #33cc33;
+            color: white;
+        }
+
+        select[name="additional_product_type[]"] option[value="Suggested Addon"] {
+            background-color: #3333cc;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quotation Form</h1>
+
+    <form id="quotation-form" class="form-container">
+        <div class="product-container">
+            <h2>Recommended Product</h2>
+            <label for="recommended-product-name">Product Name:</label>
+            <input type="text" id="recommended-product-name" name="recommended_product_name[]" required>
+            <label for="recommended-product-description">Product Description:</label>
+            <input type="text" id="recommended-product-description" name="recommended_product_description[]" required>
+            <label for="recommended-product-unit-price">Unit Price:</label>
+            <input type="number" id="recommended-product-unit-price" name="recommended_product_unit_price[]" required>
+            <label for="recommended-product-quantity">Quantity:</label>
+            <input type="number" id="recommended-product-quantity" name="recommended_product_quantity[]" required>
+            <label for="recommended-product-type">Product Type:</label>
+            <select id="recommended-product-type" name="recommended_product_type[]" required>
+                <option value="Main Product">Main Product</option>
+                <option value="Must Have Addon">Must Have Addon</option>
+                <option value="Suggested Addon">Suggested Addon</option>
+            </select>
+            <label for="recommended-product-total-price">Total Price:</label>
+            <input type="text" id="recommended-product-total-price" name="recommended_product_total_price[]" readonly>
+        </div>
+
+        <div class="button-container">
+            <button type="button" onclick="addProduct()">+ Add Product</button>
+        </div>
+
+        <input type="submit" value="Generate Quote">
+    </form>
+
+    <script>
+        let productCount = 1;
+
+        function addProduct() {
+            if (productCount < 3) {
+                const additionalProductsContainer = document.getElementById('quotation-form');
+                const newProductContainer = document.createElement('div');
+                newProductContainer.classList.add('product-container');
+                newProductContainer.innerHTML = `
+                    <h2>Additional Product ${productCount + 1}</h2>
+                    <label for="additional-product-name-${productCount}">Product Name:</label>
+                    <input type="text" name="additional_product_name[]" required>
+                    <label for="additional-product-description-${productCount}">Product Description:</label>
+                    <input type="text" name="additional_product_description[]" required>
+                    <label for="additional-product-unit-price-${productCount}">Unit Price:</label>
+                    <input type="number" name="additional_product_unit_price[]" required>
+                    <label for="additional-product-quantity-${productCount}">Quantity:</label>
+                    <input type="number" name="additional_product_quantity[]" required>
+                    <label for="additional-product-type-${productCount}">Product Type:</label>
+                    <select name="additional_product_type[]" required>
+                        <option value="Main Product">Main Product</option>
+                        <option value="Must Have Addon">Must Have Addon</option>
+                        <option value="Suggested Addon">Suggested Addon</option>
+                    </select>
+                    <label for="additional-product-total-price-${productCount}">Total Price:</label>
+                    <input type="text" name="additional_product_total_price[]" readonly>
+                `;
+                additionalProductsContainer.insertBefore(newProductContainer, document.getElementById('quotation-form').lastElementChild);
+                productCount++;
+            } else {
+                alert('You can add a maximum of 3 products.');
+            }
+        }
+    </script>
+</body>
+</html>
